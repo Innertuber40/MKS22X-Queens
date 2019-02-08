@@ -9,7 +9,7 @@ public class QueenBoard {
 		String last = "";
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
-				if (board[j][i] >= 0) {
+				if (board[i][j] >= 0) {
 					last += "_ ";
 				} else {
 					last += "Q ";
@@ -25,6 +25,13 @@ public class QueenBoard {
 					
 
 	public boolean solve() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j] != 0) {
+					throw new IllegalStateException("It has already been solved");
+				}
+			}
+		}
 		return true;
 	}
 	public int countSolutions() {

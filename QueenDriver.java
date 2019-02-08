@@ -13,5 +13,10 @@ public class QueenDriver {
 		QueenBoard testing = new QueenBoard(8);
 		testing.setBoard(testBoard);
 		System.out.println(testing);
+		try {
+			System.out.println(testing.solve());
+		} catch (IllegalStateException e) {
+			System.out.println(e);
+		}
 	}
 }
