@@ -11,6 +11,7 @@ public class QueenDriver {
 			{0, 0, 0, 0, 0, 0, 0, 0}
 		};
 		QueenBoard testing = new QueenBoard(8);
+		QueenBoard blank = new QueenBoard(16);
 		testing.setBoard(testBoard);
 		System.out.println(testing);
 		try {
@@ -18,5 +19,13 @@ public class QueenDriver {
 		} catch (IllegalStateException e) {
 			System.out.println(e);
 		}
+		System.out.println(blank);
+		try {
+			QueenBoard noWork = new QueenBoard(-1);
+		} catch (IllegalArgumentException e) {
+			System.out.println(e);
+		}
+		QueenBoard zero = new QueenBoard(0);
+		System.out.println(zero);
 	}
 }
