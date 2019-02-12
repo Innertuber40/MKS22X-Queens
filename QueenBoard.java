@@ -39,13 +39,13 @@ public class QueenBoard {
 		}
 		return solver(0, 0);
 	}
-	public void add(int i, int j) {
+	private void add(int i, int j) {
 		board[i][j] = -1;
 	}
-	public void undo(int i, int j) {
+	private void undo(int i, int j) {
 		board[i][j] = 0;
 	}
-	public boolean solver(int row, int column) {
+	private boolean solver(int row, int column) {
 		if (column == board.length) {
 			return true;
 		}
@@ -92,6 +92,11 @@ public class QueenBoard {
 
 	public int countSolutions() {
 		int count = 0;
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (solver)
+			}
+		}
 		return count;
 	}
 }
