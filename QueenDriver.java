@@ -30,5 +30,11 @@ public class QueenDriver {
 		QueenBoard firstRealTest = new QueenBoard(4);
 		System.out.println("A board of size 4 does have a solution: " + firstRealTest.solve());
 		System.out.println(firstRealTest);
+		QueenBoard traditional = new QueenBoard(8);
+		System.out.println("A board of size 8 does have a solution: " + traditional.solve());
+		System.out.println(traditional);
+		QueenBoard big = new QueenBoard(20);
+		System.out.println("A board of size 100 does have a solution: " + big.solve());
+		System.out.println(big);
 	}
 }
