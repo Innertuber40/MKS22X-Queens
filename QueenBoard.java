@@ -12,8 +12,10 @@ public class QueenBoard {
 		String last = "";
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
-				if (board[i][j] >= 0) {
+				if (board[i][j] == 0) {
 					last += "_ ";
+				} else if (board[i][j] > 0) {
+					last = last + board[i][j] + " ";
 				} else {
 					last += "Q ";
 				}
@@ -41,45 +43,51 @@ public class QueenBoard {
 		board[i][j] = -1;
 	}
 	public void undo(int i, int j) {
-		if (board[i][j] == -1) {
-			board[i][j] = 0;
-		} else {
-			board[i][j] -= 1;
-		}
+		board[i][j] = 0;
 	}
-	public boolean solver(int column, int row) {
+	public boolean solver(int row, int column) {
 		if (column == board.length) {
 			return true;
 		}
 		if (row == board.length) {
 			return false;
 		}
-		if (board[column][row] == 0) {
-			add(column, row);
+		if (board[row][column] == 0) {
+			add(row, column);
+			int upRow = row - 1;
+			int downRow = row + 1;
 			for (int i = column + 1; i < board.length; i++) {
-				for (int j = row - 1; j > 0; j--) {
-					board[i][j] = board[i][j] + 1;
+				if (upRow >= 0) {
+					board[upRow][i] = board[upRow][i] + 1;
 				}
-				board[i][row] = board[i][row] + 1;
-				for (int j = row + 1; j < board.length; j++) {
-					board[i][j] = board[i][j] + 1;
+				board[row][i] = board[row][i] + 1;
+				if (downRow < board.length) {
+					board[downRow][i] = board[downRow][i] + 1;
 				}
+				upRow--;
+				downRow++;
 			}
-			if (solver(column + 1, 0)) {
+			System.out.println(this);
+			if (solver(0, column + 1)) {
 				return true;
 			}
+			upRow = row - 1;
+			downRow = row + 1;
 			for (int i = column + 1; i < board.length; i++) {
-				for (int j = row - 1; j > 0; j--) {
-					undo(i, j);
+				if (upRow >= 0) {
+					board[upRow][i] = board[upRow][i] - 1;
 				}
-				undo(i, row);
-				for (int j = row + 1; j < board.length; j++) {
-					undo(i, j);
+				board[row][i] = board[row][i] - 1;
+				if (downRow < board.length) {
+					board[downRow][i] = board[downRow][i] - 1;
 				}
+				upRow--;
+				downRow++;
 			}
-			undo(column, row);
+			undo(row, column);
+			System.out.println(this);
 		}
-		return solver(column, row + 1);
+		return solver(row + 1, column);
 	}
 
 	public int countSolutions() {
