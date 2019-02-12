@@ -22,7 +22,7 @@ public class QueenDriver {
 		System.out.println(blank);
 		try {
 			QueenBoard noWork = new QueenBoard(-1);
-		} catch (IllegalArgumentException e) {
+		} catch (NegativeArraySizeException e) {
 			System.out.println(e);
 		}
 		QueenBoard zero = new QueenBoard(0);

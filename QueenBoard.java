@@ -3,7 +3,7 @@ public class QueenBoard {
 
 	public QueenBoard(int size) {
 		if (size < 0) {
-			throw IllegalArgumentException("A board cannot be of negative size.");
+			throw new NegativeArraySizeException("A board cannot be of negative size.");
 		}
 		board = new int[size][size];
 	}
