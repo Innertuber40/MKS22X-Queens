@@ -12,11 +12,11 @@ public class QueenBoard {
 		String last = "";
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
-				if (board[i][j] >= 0) {                    // change to == for debugging
+				if (board[i][j] == 0) {                    // change to == for debugging
 					last += "_ ";
-				}/* else if (board[i][j] > 0) {
+				} else if (board[i][j] > 0) {
 					last = last + board[i][j] + " ";
-				}*/ else {
+				} else {
 					last += "Q ";
 				}
 			}
@@ -91,10 +91,45 @@ public class QueenBoard {
 	}
 
 	public int countSolutions() {
-		int count = 0;
-		for (int i = 0; i < board.length; i++) {
-			for (int j = 0; j < board.length; j++) {
-				if (solver)
+		return counter(0, 0);
+	}
+	private int counter(int column, int count) {
+		if (column == board.length) {
+			return count + 1;
+		}
+		for (int k = 0; k < board.length; k++) {
+			if (board[k][column] == 0) {
+				add(k, column);
+				int upRow = k - 1;
+				int downRow = k + 1;
+				for (int i = column + 1; i < board.length; i++) {
+					if (upRow >= 0) {
+						board[upRow][i] = board[upRow][i] + 1;
+					}
+					board[k][i] = board[k][i] + 1;
+					if (downRow < board.length) {
+						board[downRow][i] = board[downRow][i] + 1;
+					}
+					upRow--;
+					downRow++;
+				}
+				System.out.println(this);
+				count = counter(column + 1, count);
+				upRow = k - 1;
+				downRow = k + 1;
+				for (int i = column + 1; i < board.length; i++) {
+					if (upRow >= 0) {
+						board[upRow][i] = board[upRow][i] - 1;
+					}
+					board[k][i] = board[k][i] - 1;
+					if (downRow < board.length) {
+						board[downRow][i] = board[downRow][i] - 1;
+					}
+					upRow--;
+					downRow++;
+				}
+				undo(k, column);
+				System.out.println(this);
 			}
 		}
 		return count;
