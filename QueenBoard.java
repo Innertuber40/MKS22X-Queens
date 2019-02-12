@@ -28,7 +28,6 @@ public class QueenBoard {
 					
 
 	public boolean solve() {
-		boolean returns = false;
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
 				if (board[i][j] != 0) {
@@ -36,10 +35,7 @@ public class QueenBoard {
 				}
 			}
 		}
-		for (int j = 0; j < board.length; j++) {
-			returns = returns || solver(0, j);
-		}
-		return returns;
+		return solver(0, 0);
 	}
 	public void add(int i, int j) {
 		board[i][j] = -1;
@@ -66,7 +62,9 @@ public class QueenBoard {
 					board[i][j] = board[i][j] + 1;
 				}
 			}
-			undo(column, row);
+			return solver(column + 1, 0);
+		} else {
+			return solver(column, row + 1);
 		}
 	}
 
