@@ -12,11 +12,11 @@ public class QueenBoard {
 		String last = "";
 		for (int i = 0; i < board.length; i++) {
 			for (int j = 0; j < board.length; j++) {
-				if (board[i][j] == 0) {
+				if (board[i][j] >= 0) {                    // change to == for debugging
 					last += "_ ";
-				} else if (board[i][j] > 0) {
+				}/* else if (board[i][j] > 0) {
 					last = last + board[i][j] + " ";
-				} else {
+				}*/ else {
 					last += "Q ";
 				}
 			}
@@ -67,7 +67,7 @@ public class QueenBoard {
 				upRow--;
 				downRow++;
 			}
-			System.out.println(this);
+			//System.out.println(this);
 			if (solver(0, column + 1)) {
 				return true;
 			}
@@ -85,7 +85,7 @@ public class QueenBoard {
 				downRow++;
 			}
 			undo(row, column);
-			System.out.println(this);
+			//System.out.println(this);
 		}
 		return solver(row + 1, column);
 	}
