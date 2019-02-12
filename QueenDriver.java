@@ -30,6 +30,11 @@ public class QueenDriver {
 		QueenBoard firstRealTest = new QueenBoard(4);
 		System.out.println("A board of size 4 does have a solution: " + firstRealTest.solve());
 		System.out.println(firstRealTest);
+		try {
+			System.out.println("A board of size 4 has this many solutions: " + firstRealTest.countSolutions());
+		} catch (IllegalStateException e) {
+			System.out.println(e);
+		}
 		QueenBoard traditional = new QueenBoard(8);
 		System.out.println("A board of size 8 does have a solution: " + traditional.solve());
 		System.out.println(traditional);

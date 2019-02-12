@@ -91,6 +91,13 @@ public class QueenBoard {
 	}
 
 	public int countSolutions() {
+		for (int i = 0; i < board.length; i++) {
+			for (int j = 0; j < board.length; j++) {
+				if (board[i][j] != 0) {
+					throw new IllegalStateException("It has already been solved");
+				}
+			}
+		}
 		return counter(0, 0);
 	}
 	private int counter(int column, int count) {
