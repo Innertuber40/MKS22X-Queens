@@ -47,5 +47,8 @@ public class QueenDriver {
 		QueenBoard aboutBestForGoodRuntime = new QueenBoard(13);
 		System.out.println("A board of size 13 has this many solutions: " + aboutBestForGoodRuntime.countSolutions());
 		System.out.println(aboutBestForGoodRuntime);
+		QueenBoard notSolveable = new QueenBoard(3);
+		System.out.println(notSolveable.solve());
+		System.out.println(notSolveable);
 	}
 }
