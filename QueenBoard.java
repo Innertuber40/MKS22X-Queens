@@ -51,6 +51,9 @@ public class QueenBoard {
 		if (column == board.length) {
 			return true;
 		}
+		if (row == board.length) {
+			return false;
+		}
 		if (board[column][row] == 0) {
 			add(column, row);
 			for (int i = column + 1; i < board.length; i++) {
@@ -62,10 +65,21 @@ public class QueenBoard {
 					board[i][j] = board[i][j] + 1;
 				}
 			}
-			return solver(column + 1, 0);
-		} else {
-			return solver(column, row + 1);
+			if (solver(column + 1, 0)) {
+				return true;
+			}
+			for (int i = column + 1; i < board.length; i++) {
+				for (int j = row - 1; j > 0; j--) {
+					undo(i, j);
+				}
+				undo(i, row);
+				for (int j = row + 1; j < board.length; j++) {
+					undo(i, j);
+				}
+			}
+			undo(column, row);
 		}
+		return solver(column, row + 1);
 	}
 
 	public int countSolutions() {
